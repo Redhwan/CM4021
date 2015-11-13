@@ -6,39 +6,41 @@ public class MovingPlatform : MonoBehaviour {
 
 	public Transform a;
 	public Transform b;
-	public float speed;
-	private float timing;
+	public bool isLeftSide;
+	public bool isHorizontal;
 	private bool moveRight;
-//	private CameraCon camcon;
 	private GameManager gameManager;
 	private Transform playerParent;
+	private Vector3 moveDirection;
+	private Vector3 moveHor;
+	private Vector3 moveVer;
 
 
 	void Start()
 	{
-//		GameObject CamerConObject = GameObject.Find ("BottomBoundry");
-//		camcon = CamerConObject.GetComponent <CameraCon> ();
-
 		GameObject GameManagerObject = GameObject.Find ("GameManager");
 		gameManager = GameManagerObject.GetComponent <GameManager> ();
-
 		playerParent = GameObject.FindWithTag ("Player").transform.parent;
 
-		timing = 0.0f;
-		speed = 0.003f;
+		moveHor = new Vector3 (2.0f, 0.0f, 0.0f);
+		moveVer = new Vector3 (0.0f, 0.0f, 2.0f);
+
+		checkAngle ();
 		moveRight = true;
+
 	}
 
 
 	void Update()
 	{
-//		if (camcon.gameover) {
+
+
 		if (gameManager.gameover){
 			
 		} else {
-
 		
-			movePlatform ();
+			MoveCheckedPlatform ();
+		
 		}
 
 	}
@@ -53,24 +55,64 @@ public class MovingPlatform : MonoBehaviour {
 
 
 
-
-	void movePlatform(){
-		timing += speed;
-		
-		if (moveRight) {
-			transform.position = Vector3.Lerp (a.position, b.position, timing);
-			if (transform.position == b.position) {
-				moveRight = false;
-				timing = 0.0f;
+	void MoveCheckedPlatform(){
+		if (isLeftSide) {
+			if (Input.GetKeyDown (KeyCode.UpArrow) || Input.GetKeyDown (KeyCode.LeftArrow) || 
+			    Input.GetKeyDown (KeyCode.DownArrow) || Input.GetKeyDown (KeyCode.RightArrow)) 
+			{
+				movePlatform ();
 			}
+
 		} else {
-			transform.position = Vector3.Lerp (b.position, a.position, timing);
-			if (transform.position == a.position) {
-				moveRight = true;
-				timing = 0.0f;
+			if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown (KeyCode.A) || 
+			    Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown (KeyCode.D)) 
+			{
+				movePlatform ();
 			}
 		}
 	}
+
+
+	void movePlatform(){
+		if (moveRight) {
+			transform.Translate (moveDirection);
+			if (transform.position == b.position) {
+				moveRight = false;
+			}
+		} else {
+			transform.Translate (-moveDirection);
+			if (transform.position == a.position) {
+				moveRight = true;
+			}
+		}
+	}
+
+	void checkAngle(){
+		if (isHorizontal) {
+			moveDirection = moveHor;
+		} else {
+			moveDirection = moveVer;
+		}
+	}
+
+
+//	void movePlatform(){
+//		timing += speed;
+//		
+//		if (moveRight) {
+//			transform.position = Vector3.Lerp (a.position, b.position, timing);
+//			if (transform.position == b.position) {
+//				moveRight = false;
+//				timing = 0.0f;
+//			}
+//		} else {
+//			transform.position = Vector3.Lerp (b.position, a.position, timing);
+//			if (transform.position == a.position) {
+//				moveRight = true;
+//				timing = 0.0f;
+//			}
+//		}
+//	}
 
 
 }

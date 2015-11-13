@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour {
 	private RaycastHit what;
 	private GameObject thing;
 	private string under;
-//	private CameraCon camcon;
 	private GameManager gameManager;
 
 	void Start(){
