@@ -6,9 +6,10 @@ public class GameManager : MonoBehaviour {
 	
 	private GameObject cam;
 	public float speed;
-	public Text gameovertext;
-	public Text restarttext;
+	public Text centreText;
+	public Text topRightText;
 	public bool gameover;
+	public bool levelcomplete;
 	
 	private float checkPerc;
 	public float LvlpercentageComplete;
@@ -19,11 +20,9 @@ public class GameManager : MonoBehaviour {
 	{
 		checkPerc = PlayerPrefs.GetFloat ("Lvl1");
 		cam = GameObject.Find ("CameraCont");
-		speed = 0.01f;
+		speed = 0.03f;
 		gameover = false;
-
-
-
+		levelcomplete = false;
 	}
 	
 	
@@ -36,7 +35,16 @@ public class GameManager : MonoBehaviour {
 				Application.LoadLevel(0);
 			} 
 		} else {
+			if(levelcomplete){
+				completeLevel();
+				if (Input.anyKeyDown) {
+					Application.LoadLevel(2);
+				}
+
+
+			} else {
 			moveCamera(speed);
+			}
 		}
 	}
 	
@@ -47,9 +55,20 @@ public class GameManager : MonoBehaviour {
 	
 	public void gameOver(){
 		gameover = true;
-		gameovertext.enabled = true;
-		restarttext.enabled = true;
+		centreText.text = (int)LvlpercentageComplete + "%";
+		centreText.enabled = true;
+		topRightText.text = "Press 'R' to retry";
+		topRightText.enabled = true;
 		setHighScore ();
+	}
+
+	public void completeLevel (){
+		PlayerPrefs.SetFloat ("Lvl1", 100.0f);
+		levelcomplete = true;
+		centreText.text = "Level Complete";
+		centreText.enabled = true;
+		topRightText.text = "Press any key to continue";
+		topRightText.enabled = true;
 	}
 
 	void setHighScore(){
