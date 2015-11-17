@@ -11,10 +11,8 @@ public class Teleporter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		GameObject GameManagerObject = GameObject.Find ("GameManager");
-		gameManager = GameManagerObject.GetComponent <GameManager> ();
-
-//		player = GameObject.FindWithTag ("Player");
+		GameObject LevelsControllerObject = GameObject.Find ("LevelsController");
+		gameManager = LevelsControllerObject.GetComponent <GameManager> ();
 	
 	}
 	

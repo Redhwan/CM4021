@@ -16,11 +16,8 @@ public class PlayerController : MonoBehaviour {
 
 	void Start(){
 
-//		GameObject CamerConObject = GameObject.Find ("BottomBoundry");
-//		camcon = CamerConObject.GetComponent <CameraCon> ();
-
-		GameObject GameManagerObject = GameObject.Find ("GameManager");
-		gameManager = GameManagerObject.GetComponent <GameManager> ();
+		GameObject LevelsControllerObject = GameObject.Find ("LevelsController");
+		gameManager = LevelsControllerObject.GetComponent <GameManager> ();
 
 		moveHor = new Vector3 (2.0f, 0.0f, 0.0f);
 		moveVer = new Vector3 (0.0f, 0.0f, 2.0f);

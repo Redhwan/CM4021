@@ -10,12 +10,20 @@ public class GameManager : MonoBehaviour {
 	public Text restarttext;
 	public bool gameover;
 	
+	private float checkPerc;
+	public float LvlpercentageComplete;
+
+	
 	
 	void Start ()
 	{
+		checkPerc = PlayerPrefs.GetFloat ("Lvl1");
 		cam = GameObject.Find ("CameraCont");
 		speed = 0.01f;
 		gameover = false;
+
+
+
 	}
 	
 	
@@ -23,6 +31,8 @@ public class GameManager : MonoBehaviour {
 	{
 		if (gameover) {
 			if (Input.GetKeyDown (KeyCode.R)) {
+				Application.LoadLevel(1);
+			} if (Input.GetKeyDown (KeyCode.Q)) {
 				Application.LoadLevel(0);
 			} 
 		} else {
@@ -39,5 +49,17 @@ public class GameManager : MonoBehaviour {
 		gameover = true;
 		gameovertext.enabled = true;
 		restarttext.enabled = true;
+		setHighScore ();
+	}
+
+	void setHighScore(){
+	if (LvlpercentageComplete > checkPerc) {
+		if (Application.loadedLevel == 1) {
+					PlayerPrefs.SetFloat ("Lvl1", LvlpercentageComplete);
+			}
+//		if (Application.loadedLevel == 2) {
+//				PlayerPrefs.SetFloat ("Lvl2", LvlpercentageComplete);
+//			}
+		}
 	}
 }

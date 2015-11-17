@@ -18,8 +18,8 @@ public class MovingPlatform : MonoBehaviour {
 
 	void Start()
 	{
-		GameObject GameManagerObject = GameObject.Find ("GameManager");
-		gameManager = GameManagerObject.GetComponent <GameManager> ();
+		GameObject LevelsControllerObject = GameObject.Find ("LevelsController");
+		gameManager = LevelsControllerObject.GetComponent <GameManager> ();
 		playerParent = GameObject.FindWithTag ("Player").transform.parent;
 
 		moveHor = new Vector3 (2.0f, 0.0f, 0.0f);
