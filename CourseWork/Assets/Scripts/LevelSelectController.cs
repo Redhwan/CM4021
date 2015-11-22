@@ -18,8 +18,12 @@ public class LevelSelectController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+//		PlayerPrefs.SetFloat("Lvl1", 0.0f);
+
+
 		level1 = PlayerPrefs.GetFloat ("Lvl1");
 		level2 = PlayerPrefs.GetFloat ("Lvl2");
+
 
 		level1Text.text = (int)level1+ "%";
 		level2Text.text = (int)level2 + "%";
