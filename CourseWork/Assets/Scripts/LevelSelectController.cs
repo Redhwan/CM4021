@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class LevelSelectController : MonoBehaviour {
 
 
-	private float level1;
-	private float level2;
+	private float level1Right;
+	private float level1Left;
 
 	public Button level2Button;
 
@@ -18,18 +18,18 @@ public class LevelSelectController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-//		PlayerPrefs.SetFloat("Lvl1", 0.0f);
+//		PlayerPrefs.SetFloat("Lvl1Right", 0.0f);
+//		PlayerPrefs.SetFloat("Lvl1Left", 0.0f);
 
 
-		level1 = PlayerPrefs.GetFloat ("Lvl1");
-		level2 = PlayerPrefs.GetFloat ("Lvl2");
+		level1Right = PlayerPrefs.GetFloat ("Lvl1Right");
+		level1Left = PlayerPrefs.GetFloat ("Lvl1Left");
 
 
-		level1Text.text = (int)level1+ "%";
-		level2Text.text = (int)level2 + "%";
+		level1Text.text = (int)level1Left + "% | " + (int)level1Right + "%";
 
 		
-		if ((int)level1 == 100) {
+		if ((int)level1Left == 100 || (int)level1Right == 100) {
 			level2Button.interactable = true;
 		}
 

@@ -11,14 +11,17 @@ public class GameManager : MonoBehaviour {
 	public bool gameover;
 	public bool levelcomplete;
 	
-	private float checkPerc;
-	public float LvlpercentageComplete;
+	private float checkPercRight;
+	public float LvlpercentageCompleteRight;
+	private float checkPercLeft;
+	public float LvlpercentageCompleteLeft;
 
 	
 	
 	void Start ()
 	{
-		checkPerc = PlayerPrefs.GetFloat ("Lvl1");
+		checkPercRight = PlayerPrefs.GetFloat ("Lvl1Right");
+		checkPercLeft = PlayerPrefs.GetFloat ("Lvl1Left");
 		cam = GameObject.Find ("CameraCont");
 		speed = 0.03f;
 		gameover = false;
@@ -55,7 +58,7 @@ public class GameManager : MonoBehaviour {
 	
 	public void gameOver(){
 		gameover = true;
-		centreText.text = (int)LvlpercentageComplete + "%";
+		centreText.text = (int)LvlpercentageCompleteLeft + "% | " + (int)LvlpercentageCompleteRight + "%";
 		centreText.enabled = true;
 		topRightText.text = "Press 'R' to retry";
 		topRightText.enabled = true;
@@ -63,7 +66,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void completeLevel (){
-		PlayerPrefs.SetFloat ("Lvl1", 100.0f);
+	//	PlayerPrefs.SetFloat ("Lvl1Right", 100.0f);
+		setHighScore();
 		levelcomplete = true;
 		centreText.text = "Level Complete";
 		centreText.enabled = true;
@@ -72,13 +76,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void setHighScore(){
-	if (LvlpercentageComplete > checkPerc) {
 		if (Application.loadedLevel == 1) {
-					PlayerPrefs.SetFloat ("Lvl1", LvlpercentageComplete);
+	if (LvlpercentageCompleteRight > checkPercRight) {
+					PlayerPrefs.SetFloat ("Lvl1Right", LvlpercentageCompleteRight);
 			}
-//		if (Application.loadedLevel == 2) {
-//				PlayerPrefs.SetFloat ("Lvl2", LvlpercentageComplete);
-//			}
+	if (LvlpercentageCompleteLeft > checkPercLeft) {
+					PlayerPrefs.SetFloat ("Lvl1Left", LvlpercentageCompleteLeft);
+			}
 		}
 	}
 }

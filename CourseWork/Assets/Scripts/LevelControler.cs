@@ -8,9 +8,12 @@ public class LevelControler : MonoBehaviour {
 	public Text LvlPercText;
 
 	private float finPos;
-	private float pathDist;
-	private float strtPos;
-	private float playerPos;
+	private float pathDistRight;
+	private float pathDistLeft;
+	private float strtPosRight;
+	private float strtPosLeft;
+	private float playerPosRight;
+	private float playerPosLeft;
 	private float percentageText;
 
 	private GameManager gameManager;
@@ -22,10 +25,12 @@ public class LevelControler : MonoBehaviour {
 		GameObject LevelsControllerObject = GameObject.Find ("LevelsController");
 		gameManager = LevelsControllerObject.GetComponent <GameManager> ();
 
-		strtPos = GameObject.Find ("RightSphere").transform.position.z;
+		strtPosRight = GameObject.Find ("RightSphere").transform.position.z;
+		strtPosLeft = GameObject.Find ("LeftSphere").transform.position.z;
 		finPos = GameObject.Find ("FinishLine").transform.position.z;
-		pathDist = finPos - strtPos;
-
+		pathDistRight = finPos - strtPosRight;
+		pathDistLeft = finPos - strtPosLeft;
+	
 	}
 	
 	// Update is called once per frame
@@ -33,8 +38,10 @@ public class LevelControler : MonoBehaviour {
 		if (gameManager.gameover) {
 
 		} else {
-			playerPos = GameObject.Find ("RightSphere").transform.position.z - strtPos;
-			gameManager.LvlpercentageComplete = (playerPos/pathDist)*100;
+			playerPosRight = GameObject.Find ("RightSphere").transform.position.z - strtPosRight;
+			playerPosLeft = GameObject.Find ("LeftSphere").transform.position.z - strtPosLeft;
+			gameManager.LvlpercentageCompleteRight = (playerPosRight/pathDistRight)*100;
+			gameManager.LvlpercentageCompleteLeft = (playerPosLeft/pathDistLeft)*100;
 		}
 
 
