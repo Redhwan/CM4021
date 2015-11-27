@@ -7,12 +7,16 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 originalPosL;
 	private Vector3 moveHor;
 	private Vector3 moveVer;
-	private GameObject rightP;
-	private GameObject leftP;
+	private Rigidbody rightP;
+	private Rigidbody leftP;
+	private Vector3 jump;
 	private RaycastHit what;
 	private GameObject thing;
 	private string under;
 	private GameManager gameManager;
+
+
+
 
 	void Start(){
 
@@ -21,8 +25,12 @@ public class PlayerController : MonoBehaviour {
 
 		moveHor = new Vector3 (2.0f, 0.0f, 0.0f);
 		moveVer = new Vector3 (0.0f, 0.0f, 2.0f);
-		rightP = GameObject.Find ("RightSphere");
-		leftP = GameObject.Find ("LeftSphere");
+		jump = new Vector3 (0.0f, 2.0f, 0.0f);
+		rightP = GameObject.Find ("RightSphere").GetComponent<Rigidbody> ();
+		leftP = GameObject.Find ("LeftSphere").GetComponent<Rigidbody> ();
+
+
+
 
 	}
 
@@ -39,6 +47,8 @@ public class PlayerController : MonoBehaviour {
 			checkBelowPlayer();
 
 		}
+
+
 	}
 
 //	void OnCollisionEnter(Collision col) {
@@ -65,22 +75,32 @@ public class PlayerController : MonoBehaviour {
 	 void movePlayers( Vector3 orPosR, Vector3 orPosL){
 
 		if (Input.GetKeyDown (KeyCode.RightArrow)) {
-			rightP.GetComponent<Rigidbody> ().MovePosition (orPosR + moveHor);
+			rightP.MovePosition (orPosR + moveHor);
 		} if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-			rightP.GetComponent<Rigidbody> ().MovePosition (orPosR - moveHor);
+			rightP.MovePosition (orPosR - moveHor);
 		} if (Input.GetKeyDown (KeyCode.UpArrow)) {
-			rightP.GetComponent<Rigidbody> ().MovePosition (orPosR + moveVer);
+			rightP.MovePosition (orPosR + moveVer);
 		} if (Input.GetKeyDown (KeyCode.DownArrow)) {
-			rightP.GetComponent<Rigidbody> ().MovePosition (orPosR - moveVer);
+			rightP.MovePosition (orPosR - moveVer);
 		} if (Input.GetKeyDown (KeyCode.D)) {
-			leftP.GetComponent<Rigidbody> ().MovePosition (orPosL + moveHor);
+			leftP.MovePosition (orPosL + moveHor);
 		} if (Input.GetKeyDown (KeyCode.A)) {
-			leftP.GetComponent<Rigidbody> ().MovePosition (orPosL - moveHor);
+			leftP.MovePosition (orPosL - moveHor);
 		} if (Input.GetKeyDown (KeyCode.W)) {
-			leftP.GetComponent<Rigidbody> ().MovePosition (orPosL + moveVer);
+			leftP.MovePosition (orPosL + moveVer);
 		} if (Input.GetKeyDown (KeyCode.S)) {
-			leftP.GetComponent<Rigidbody> ().MovePosition (orPosL - moveVer);
+			leftP.MovePosition (orPosL - moveVer);
 		}
+
+
+		if (Input.GetKeyDown (KeyCode.Space) & transform.position.y == 2.0f ) {
+
+			rightP.MovePosition (orPosR + jump);
+			leftP.MovePosition (orPosL + jump);
+			
+		}
+
+
 	}
 
 	public void checkBelowPlayer(){
@@ -101,3 +121,31 @@ public class PlayerController : MonoBehaviour {
 	}
 
 }
+
+
+//using UnityEngine;
+//using System.Collections;
+//
+//public class PlayerController : MonoBehaviour {
+//	
+//	public float speed;
+//	
+//	private Rigidbody rb;
+//	
+//	void Start ()
+//	{
+//		rb = GetComponent<Rigidbody>();
+//	}
+//	
+//	void FixedUpdate ()
+//	{
+//		float moveHorizontal = Input.GetAxis ("Horizontal");
+//		float moveVertical = Input.GetAxis ("Vertical");
+//		
+//		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+//
+//		rb.transform.Translate (movement * speed);
+//
+////		rb.AddForce (movement * speed);
+//	}
+//}

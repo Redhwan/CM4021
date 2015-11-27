@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class LevelControler : MonoBehaviour {
 
 	
-	public Text LvlPercText;
+//	public Text LvlPercText;
 
 	private float finPos;
 	private float pathDistRight;
