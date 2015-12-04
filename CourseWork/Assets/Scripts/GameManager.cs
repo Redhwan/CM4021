@@ -32,11 +32,7 @@ public class GameManager : MonoBehaviour {
 	void Update ()
 	{
 		if (gameover) {
-			if (Input.GetKeyDown (KeyCode.R)) {
-				Application.LoadLevel(1);
-			} if (Input.GetKeyDown (KeyCode.Q)) {
-				Application.LoadLevel(0);
-			} 
+			restart();
 		} else {
 			if(levelcomplete){
 				completeLevel();
@@ -63,6 +59,14 @@ public class GameManager : MonoBehaviour {
 		topRightText.text = "Press 'R' to retry";
 		topRightText.enabled = true;
 		setHighScore ();
+	}
+
+	public void restart(){
+		if (Input.GetKeyDown (KeyCode.R)) {
+			Application.LoadLevel(Application.loadedLevel);
+		} if (Input.GetKeyDown (KeyCode.Q)) {
+			Application.LoadLevel(0);
+		} 
 	}
 
 	public void completeLevel (){

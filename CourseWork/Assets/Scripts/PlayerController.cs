@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector3 moveVer;
 	private Rigidbody rightP;
 	private Rigidbody leftP;
-	private Vector3 jump;
+//	private Vector3 jump;
 	private RaycastHit what;
 	private GameObject thing;
 	private string under;
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour {
 
 		moveHor = new Vector3 (2.0f, 0.0f, 0.0f);
 		moveVer = new Vector3 (0.0f, 0.0f, 2.0f);
-		jump = new Vector3 (0.0f, 2.0f, 0.0f);
+//		jump = new Vector3 (0.0f, 2.0f, 0.0f);
 		rightP = GameObject.Find ("RightSphere").GetComponent<Rigidbody> ();
 		leftP = GameObject.Find ("LeftSphere").GetComponent<Rigidbody> ();
 
@@ -35,6 +35,19 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update(){
+//		rightP.velocity = Vector3(rightP.velocity.x, rightP.velocity.y, 0.0f);
+//		rightP.angularVelocity.z = 0.0f;
+//		leftP.angularVelocity.z = 0.0f;
+		leftP.velocity = new Vector3(0.0f, leftP.velocity.y, 0.0f);
+		rightP.velocity = new Vector3(0.0f, rightP.velocity.y, 0.0f);
+
+
+//		Debug.Log("Right Velocity: " + rightP.velocity.z);
+//		Debug.Log("Right AngVelocity: " + rightP.angularVelocity.y);
+
+//		Debug.Log("Left Velocity: " + leftP.velocity.z);
+//		Debug.Log("Left AngVelocity: " + leftP.angularVelocity.y);
+
 //		if (camcon.gameover) {
 		if (gameManager.gameover) {
 
@@ -93,12 +106,12 @@ public class PlayerController : MonoBehaviour {
 		}
 
 
-		if (Input.GetKeyDown (KeyCode.Space) & transform.position.y == 2.0f ) {
-
-			rightP.MovePosition (orPosR + jump);
-			leftP.MovePosition (orPosL + jump);
-			
-		}
+//		if (Input.GetKeyDown (KeyCode.Space) & transform.position.y == 2.0f ) {
+//
+//			rightP.MovePosition (orPosR + jump);
+//			leftP.MovePosition (orPosL + jump);
+//			
+//		}
 
 
 	}
