@@ -16,11 +16,13 @@ public class ButtonManager : MonoBehaviour {
 	
 	}
 
-	public void onClickL1(){
+	public void onClickTutorial(){
 		Application.LoadLevel (1);
 	}
 
-	public void onClickL2(){
+	public void onClickL1(){
 		Application.LoadLevel (2);
 	}
+
+
 }

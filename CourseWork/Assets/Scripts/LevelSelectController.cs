@@ -7,11 +7,13 @@ public class LevelSelectController : MonoBehaviour {
 
 	private float level1Right;
 	private float level1Left;
+	private float tutorialRight;
+	private float tutorialLeft;
 
-	public Button level2Button;
+	public Button level1Button;
 
 	public Text level1Text;
-	public Text level2Text;
+	public Text tutorialText;
 
 	public bool lvl1Complete;
 
@@ -20,17 +22,24 @@ public class LevelSelectController : MonoBehaviour {
 
 //		PlayerPrefs.SetFloat("Lvl1Right", 0.0f);
 //		PlayerPrefs.SetFloat("Lvl1Left", 0.0f);
+//		PlayerPrefs.SetFloat("tutorialRight", 0.0f);
+//		PlayerPrefs.SetFloat("tutorialLeft", 0.0f);
 
+
+		tutorialRight = PlayerPrefs.GetFloat ("tutorialRight");
+		tutorialLeft = PlayerPrefs.GetFloat ("tutorialLeft");
 
 		level1Right = PlayerPrefs.GetFloat ("Lvl1Right");
 		level1Left = PlayerPrefs.GetFloat ("Lvl1Left");
 
 
+		tutorialText.text = (int)tutorialLeft + "% | " + (int)tutorialRight + "%";
 		level1Text.text = (int)level1Left + "% | " + (int)level1Right + "%";
 
+
 		
-		if ((int)level1Left == 100 || (int)level1Right == 100) {
-			level2Button.interactable = true;
+		if ((int)tutorialLeft == 100 || (int)tutorialRight == 100) {
+			level1Button.interactable = true;
 		}
 
 	}
@@ -40,3 +49,5 @@ public class LevelSelectController : MonoBehaviour {
 	
 	}
 }
+
+

@@ -20,8 +20,14 @@ public class GameManager : MonoBehaviour {
 	
 	void Start ()
 	{
-		checkPercRight = PlayerPrefs.GetFloat ("Lvl1Right");
-		checkPercLeft = PlayerPrefs.GetFloat ("Lvl1Left");
+		if (Application.loadedLevel == 1) {
+			checkPercRight = PlayerPrefs.GetFloat ("tutorialRight");
+			checkPercLeft = PlayerPrefs.GetFloat ("tutorialLeft");
+		}else if (Application.loadedLevel == 2) {
+			checkPercRight = PlayerPrefs.GetFloat ("Lvl1Right");
+			checkPercLeft = PlayerPrefs.GetFloat ("Lvl1Left");
+		}
+
 		cam = GameObject.Find ("CameraCont");
 		speed = 0.03f;
 		gameover = false;
@@ -70,7 +76,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void completeLevel (){
-	//	PlayerPrefs.SetFloat ("Lvl1Right", 100.0f);
 		setHighScore();
 		levelcomplete = true;
 		centreText.text = "Level Complete";
@@ -81,10 +86,17 @@ public class GameManager : MonoBehaviour {
 
 	void setHighScore(){
 		if (Application.loadedLevel == 1) {
-	if (LvlpercentageCompleteRight > checkPercRight) {
+			if (LvlpercentageCompleteRight > checkPercRight) {
+				PlayerPrefs.SetFloat ("tutorialRight", LvlpercentageCompleteRight);
+			}
+			if (LvlpercentageCompleteLeft > checkPercLeft) {
+				PlayerPrefs.SetFloat ("tutorialLeft", LvlpercentageCompleteLeft);
+			}
+		}else if (Application.loadedLevel == 2) {
+			if (LvlpercentageCompleteRight > checkPercRight) {
 					PlayerPrefs.SetFloat ("Lvl1Right", LvlpercentageCompleteRight);
 			}
-	if (LvlpercentageCompleteLeft > checkPercLeft) {
+			if (LvlpercentageCompleteLeft > checkPercLeft) {
 					PlayerPrefs.SetFloat ("Lvl1Left", LvlpercentageCompleteLeft);
 			}
 		}
