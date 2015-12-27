@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 		rightP = GameObject.Find ("RightSphere").GetComponent<Rigidbody> ();
 		leftP = GameObject.Find ("LeftSphere").GetComponent<Rigidbody> ();
 		rightP.freezeRotation = true;
+		leftP.freezeRotation = true;
 
 
 
@@ -38,8 +39,8 @@ public class PlayerController : MonoBehaviour {
 //		rightP.velocity = Vector3(rightP.velocity.x, rightP.velocity.y, 0.0f);
 //		rightP.angularVelocity.z = 0.0f;
 //		leftP.angularVelocity.z = 0.0f;
-		leftP.velocity = new Vector3(0.0f, leftP.velocity.y, 0.0f);
-		rightP.velocity = new Vector3(0.0f, rightP.velocity.y, 0.0f);
+//		leftP.velocity = new Vector3(0.0f, leftP.velocity.y, 0.0f);
+//		rightP.velocity = new Vector3(0.0f, rightP.velocity.y, 0.0f);
 //		leftP.rotation = new Quaternion (0.0f);
 
 

@@ -24,5 +24,15 @@ public class ButtonManager : MonoBehaviour {
 		Application.LoadLevel (2);
 	}
 
+	public void onClickReset(){
+
+		PlayerPrefs.SetFloat ("Lvl1Right", 0.0f);
+		PlayerPrefs.SetFloat ("Lvl1Left", 0.0f);
+		PlayerPrefs.SetFloat ("tutorialRight", 0.0f);
+		PlayerPrefs.SetFloat ("tutorialLeft", 0.0f);
+		Application.LoadLevel(Application.loadedLevel);
+	}
+	
+
 
 }
